@@ -74,10 +74,10 @@ def log_class_method_call(func):
     """
 
     @functools.wraps(func)
-    def wrapper(cls, *args, **kwargs):
+    def class_method_wrapper(cls, *args, **kwargs):
         start_time = time.time()
         result = func(cls, *args, **kwargs)
-        log_call(func.__name__, start_time, result, args, kwargs, is_classmethod=True, cls=cls)
+        end_time = time.time()
+        logging.info(f"Called {cls.__name__}.{func.__name__} with args {args}, kwargs {kwargs}; Returned {result} in {end_time - start_time:.2f}s")
         return result
-
-    return classmethod(wrapper)
+    return classmethod(class_method_wrapper)
