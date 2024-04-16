@@ -42,9 +42,9 @@ def log_call(func_name, start_time, result, args=None, kwargs=None, is_classmeth
     kwargs_repr = [f"{k}={v!r}" for k, v in (kwargs.items() if kwargs else [])]
     signature = ", ".join(args_repr + kwargs_repr)
     class_info = f"{cls.__name__}." if cls and is_classmethod else ""
-    logging.info(f"----- START {class_info}{func_name} ----- \n" + 13*("\t") + "ARG {signature}")
+    logging.info(f"----- START {class_info}{func_name} ----- \n" + 13*("\t") + f"ARG {signature}")
     end_time = time.time()
-    logging.info(f"===== END {class_info}{func_name} in {end_time - start_time:.2f} seconds ===== \n" + 13*("\t") + "RES {result}")
+    logging.info(f"===== END {class_info}{func_name} in {end_time - start_time:.2f} seconds ===== \n" + 13*("\t") + f"RES {result}")
 
 
 def log_function_call(func):

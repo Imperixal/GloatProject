@@ -1,12 +1,18 @@
 import time
 from test_configs.WebDriverSingleton import WebDriverSingleton
 from test_configs.WebActions import WebActions
+import pytest
 
 
-def test_temperature_conversion():
+@pytest.mark.selenium
+@pytest.mark.celsius_to_fahrenheit
+def test_celsius_to_fahrenheit():
     try:
         temp_in_c = "100"
-        temp_in_f = "212.00"
+        formula = (float(temp_in_c) * 1.8) + 32
+
+        # we need to add one more zero at the end as the result on the page is always .00 and not .0
+        temp_in_f = f"{formula:.2f}"
         actions = WebActions()
 
         # Connect to the page

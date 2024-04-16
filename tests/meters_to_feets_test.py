@@ -1,12 +1,15 @@
 import time
 from test_configs.WebDriverSingleton import WebDriverSingleton
 from test_configs.WebActions import WebActions
+import pytest
 
 
-def test_meters_conversion():
+@pytest.mark.selenium
+@pytest.mark.meters_to_feets
+def test_meters_to_feets():
     try:
         meters = "100"
-        feets = "328.08"
+        feets = str(round(float(meters) * 3.28084, 2))
         actions = WebActions()
 
         # Connect to the page
