@@ -44,6 +44,8 @@ class WebActions:
             cookies_button.click()
         except Exception as e:
             logging.info("Cookie consent button not found: %s", str(e))
+            logging.info("Skipping")
+            pass
 
     @log_function_call
     def set_value_into_conversion_input_field(self, value):
@@ -56,16 +58,13 @@ class WebActions:
         return self.driver.find_element(By.NAME, "arg")
 
     @log_function_call
-    def assert_conversion_result(self, input_value, output_value):
-
-        # Select the conversion from Celsius to Fahrenheit
-        self.driver.find_element(By.CSS_SELECTOR, "#answerDisplay")
+    def assert_conversion_result(self, expected_result):
 
         # Get the conversion result
         result = self.driver.find_element(By.CSS_SELECTOR, "#answerDisplay")
 
         try:
-            assert result.text == f"{input_value}°C = {output_value}°F"
+            assert result.text == expected_result
         except AssertionError:
-            logging.exception("Conversion failed:" + "\n" + f"we expected: {input_value}°C = {output_value}°F" + "\n" +
+            logging.exception("Conversion failed:" + "\n" + f"we expected: {expected_result}" + "\n" +
                               f"but got {result.text} instead")
