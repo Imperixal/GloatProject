@@ -1,6 +1,6 @@
 import time
 from test_configs.WebDriverSingleton import WebDriverSingleton
-from test_configs.WebActions import WebActions
+from selenium_tests_utils.WebActions import WebActions
 import pytest
 
 
